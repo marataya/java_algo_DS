@@ -48,5 +48,14 @@ public class ArrayStack<E> implements Stack<E> {
         return answer;
     }
 
+    public static void main(String[] args) {
+        Stack<Integer> s = new ArrayStack<Integer>();
+        s.push(5);
+        s.push(7);
+        System.out.println(s.size());
+        System.out.println(s.pop());
+        System.out.println(s.size());
+        System.out.println(s.top());
+    }
 
 }
