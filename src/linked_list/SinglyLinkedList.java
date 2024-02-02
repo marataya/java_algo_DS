@@ -1,11 +1,12 @@
 package linked_list;
 
-public class SinglyLinkedList<E> {
+public class SinglyLinkedList<E> implements Cloneable {
     //-----------------nested Node class-------------------
     private static class Node<E> {
 
         private E element;
         private Node<E> next;
+
         public Node(E element, Node<E> next) {
             this.element = element;
             this.next = next;
@@ -34,9 +35,26 @@ public class SinglyLinkedList<E> {
 
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        SinglyLinkedList other = (SinglyLinkedList) obj;
+        if (size != other.size) return false;
+        Node walkA = head;
+        Node walkB = other.head;
+        while (walkA != null) {
+            if (!walkA.getElement().equals(walkB.getElement())) return false;
+            walkA = walkA.getNext();
+            walkB = walkB.getNext();
+        }
+        return true;
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }
+
     public int size() {
         return size;
     }
@@ -66,6 +84,33 @@ public class SinglyLinkedList<E> {
             tail.setNext(newest);
         tail = newest;
         size++;
+    }
+
+    @Override
+    protected SinglyLinkedList<E> clone() throws CloneNotSupportedException {
+        var other = (SinglyLinkedList<E>) super.clone();
+        if (size > 0) {
+            other.head = new Node<>(head.getElement(), null);
+            Node<E> walk = head.getNext();
+            Node<E> otherTail = other.head;
+            while (walk != null) {
+                Node<E> newest = new Node<>(walk.getElement(), null);
+                otherTail.setNext(newest);
+                otherTail = newest;
+                walk = walk.getNext();
+            }
+        }
+        return other;
+    }
+
+    public static void main(String[] args) throws CloneNotSupportedException {
+        var sll = new SinglyLinkedList<Integer>();
+        sll.addLast(5);
+        sll.addLast(7);
+        sll.addLast(9);
+        var sll2 = sll.clone();
+        System.out.println(sll2.first());
+        System.out.println(sll2.last());
     }
 
 }
