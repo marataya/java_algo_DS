@@ -9,5 +9,4 @@ public interface Queue<E> {
     E dequeue();
 
     E first();
-    E last();
 }

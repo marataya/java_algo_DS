@@ -43,11 +43,6 @@ public class ArrayQueue<E> implements Queue<E> {
         return null;
     }
 
-    @Override
-    public E last() {
-        return null;
-    }
-
     public static void main(String[] args) {
         var aq = new ArrayQueue<Integer>();
         aq.enqueue(5);
