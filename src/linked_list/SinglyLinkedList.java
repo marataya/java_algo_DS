@@ -5,8 +5,8 @@ public class SinglyLinkedList<E> implements Cloneable {
     private static class Node<E> {
 
         private E element;
-        private Node<E> next;
 
+        private Node<E> next;
         public Node(E element, Node<E> next) {
             this.element = element;
             this.next = next;
@@ -24,13 +24,13 @@ public class SinglyLinkedList<E> implements Cloneable {
             this.next = next;
         }
 
+
     }
 //-----------------end of nested Node class----------------
-
     private Node<E> head = null;
+
     private Node<E> tail = null;
     private int size = 0;
-
     public SinglyLinkedList() {
 
     }
@@ -101,6 +101,17 @@ public class SinglyLinkedList<E> implements Cloneable {
             }
         }
         return other;
+    }
+
+    public E removeFirst() {
+        if (isEmpty()) return null;
+        E answer = head.getElement();
+        head = head.getNext();
+        size--;
+        if (size == 0) {
+            tail = null;
+        }
+        return answer;
     }
 
     public static void main(String[] args) throws CloneNotSupportedException {
