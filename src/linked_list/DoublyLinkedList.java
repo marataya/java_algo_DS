@@ -1,6 +1,8 @@
 package linked_list;
 
-public class DoublyLinkedList<E> {
+import stacks_queues_deques.Deque;
+
+public class DoublyLinkedList<E> implements Deque<E> {
 
     private static class Node<E> {
 
@@ -51,6 +53,11 @@ public class DoublyLinkedList<E> {
         return size;
     }
 
+    @Override
+    public int size() {
+        return size;
+    }
+
     public boolean isEmpty() {
         return size == 0;
     }
@@ -97,7 +104,9 @@ public class DoublyLinkedList<E> {
         Node<E> newest = new Node<>(e, predecessor, successor);
         predecessor.setNext(newest);
         successor.setPrev(newest);
+        size++;
     }
+
     public static void main(String[] args) {
         var dll = new DoublyLinkedList<Integer>();
         dll.addFirst(5);
